@@ -7,7 +7,7 @@ function App() {
   let response;
   useEffect(() => {
     const getResponse = async (params) =>  {
-      response = await axios.get("http://localhost:3000/");
+      response = await axios.get(`${URL}`);
       console.log(response.data.message); 
     }
 
