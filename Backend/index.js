@@ -7,14 +7,12 @@ configDotenv();
 const app = express();
 app.use(express.json());
 
-const prodOrigins = [
+const allowedOrigins = [
+  process.env.DEV_ORIGIN,
   process.env.PROD_ORIGIN1,
   process.env.PROD_ORIGIN2,
   process.env.PROD_ORIGIN3,
 ];
-const devOrigin = [process.env.DEV_ORIGIN];
-
-const allowedOrigins = process.env.ENV === "DEV" ? devOrigin : prodOrigins;
 
 // Allow requests from frontend
 app.use(
