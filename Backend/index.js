@@ -7,10 +7,13 @@ configDotenv();
 const app = express();
 app.use(express.json());
 
+console.log(
+  process.env.FRONTEND_URL);
+
 // Allow requests from frontend
 app.use(
   cors({
-    origin: `${process.env.FRONTEND_URL}`,
+    origin: "https://quick-bite-henna-one.vercel.app/",
     methods: ["GET", "POST", "PUT", "DELETE"],
     allowedHeaders: ["Content-Type", "Authorization"],
     credentials: true
