@@ -9,6 +9,6 @@ app.get('/',(req, res) => {
   res.status(200).json({ message: 'Hello World' });
 })
 
-app.listen(process.env.PORT_NUMBER, () => {
-    console.log(`Server is running on port ${process.env.PORT_NUMBER}`);
+app.listen(process.env.PORT, () => {
+    console.log(`Server is running on port ${process.env.PORT}`);
 })
