@@ -6,12 +6,12 @@ configDotenv();
 
 const app = express();
 app.use(express.json());
-
+const { DEV_ORIGIN, PROD_ORIGIN_1, PROD_ORIGIN_2, PROD_ORIGIN_3 } = process.env;
 const allowedOrigins = [
-  "http://localhost:5173",
-  "https://quick-bite-henna-one.vercel.app",
-  "https://quick-bite-shrey-prajapatis-projects.vercel.app",
-  "https://quick-bite-git-main-shrey-prajapatis-projects.vercel.app",
+  DEV_ORIGIN,
+  PROD_ORIGIN_1,
+  PROD_ORIGIN_2,
+  PROD_ORIGIN_3,
 ];
 
 // Allow requests from frontend
