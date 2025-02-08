@@ -8,22 +8,20 @@ const app = express();
 app.use(express.json());
 
 const allowedOrigins = [
-  process.env.DEV_ORIGIN,
-  process.env.PROD_ORIGIN1,
-  process.env.PROD_ORIGIN2,
-  process.env.PROD_ORIGIN3,
+  "http://localhost:5173",
+  "https://quick-bite-henna-one.vercel.app",
+  "https://quick-bite-shrey-prajapatis-projects.vercel.app",
+  "https://quick-bite-git-main-shrey-prajapatis-projects.vercel.app",
 ];
 
 // Allow requests from frontend
 app.use(
   cors({
-    origin: function (origin, callback) {
+    origin: (origin, callback) => {
       if (!origin || allowedOrigins.includes(origin)) {
-        // If origin is in the list or request has no origin (e.g., Postman), allow it
         callback(null, true);
       } else {
-        // If origin is not allowed, return an error
-        callback(new Error("CORS not allowed for this origin"));
+        callback(new Error("Not allowed by CORS"));
       }
     },
     methods: ["GET", "POST", "PUT", "DELETE"],
