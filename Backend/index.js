@@ -13,7 +13,7 @@ console.log(
 // Allow requests from frontend
 app.use(
   cors({
-    origin: 'https://quick-bite-henna-one.vercel.app/',
+    origin: 'https://quick-bite-henna-one.vercel.app',
     methods: ["GET", "POST", "PUT", "DELETE"],
     allowedHeaders: ["Content-Type", "Authorization"],
     credentials: true
