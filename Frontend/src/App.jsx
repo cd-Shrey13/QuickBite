@@ -4,7 +4,7 @@ import axios from 'axios'
 const URL = import.meta.env.VITE_URL;
 
 function App() {
-  const [response, setResponse] = useState(null)
+  const [message, setMessage] = useState(null)
   useEffect(() => {
     const getResponse = async (params) =>  {
       response = await axios.get(`${URL}`);
@@ -16,7 +16,7 @@ function App() {
   return (
     <>
       {
-        response ? <h1>{response}</h1> : <h1>Loading...</h1>
+        message ? <h1>{message}</h1> : <h1>Loading...</h1>
       }
     </>
   )
