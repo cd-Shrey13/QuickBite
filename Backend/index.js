@@ -7,16 +7,30 @@ configDotenv();
 const app = express();
 app.use(express.json());
 
-console.log(
-  process.env.FRONTEND_URL);
+const prodOrigins = [
+  process.env.PROD_ORIGIN1,
+  process.env.PROD_ORIGIN2,
+  process.env.PROD_ORIGIN3,
+];
+const devOrigin = [process.env.DEV_ORIGIN];
+
+const allowedOrigins = process.env.ENV === "DEV" ? devOrigin : prodOrigins;
 
 // Allow requests from frontend
 app.use(
   cors({
-    origin: 'https://quick-bite-henna-one.vercel.app',
+    origin: function (origin, callback) {
+      if (!origin || allowedOrigins.includes(origin)) {
+        // If origin is in the list or request has no origin (e.g., Postman), allow it
+        callback(null, true);
+      } else {
+        // If origin is not allowed, return an error
+        callback(new Error("CORS not allowed for this origin"));
+      }
+    },
     methods: ["GET", "POST", "PUT", "DELETE"],
     allowedHeaders: ["Content-Type", "Authorization"],
-    credentials: true
+    credentials: true,
   })
 );
 
