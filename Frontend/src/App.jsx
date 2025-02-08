@@ -7,8 +7,8 @@ function App() {
   const [message, setMessage] = useState(null)
   useEffect(() => {
     const getResponse = async (params) =>  {
-      response = await axios.get(`${URL}`);
-      setResponse(response.data.message); 
+      const response = await axios.get(`${URL}`);
+      setMessage(response.data.message); 
     }
 
     getResponse();
