@@ -6,8 +6,9 @@ configDotenv();
 
 const app = express();
 app.use(express.json());
-// Allow requests from localhost:3000 (or any other port)
-app.use(cors({ origin: "http://localhost:5173" })); // Adjust the port as needed
+
+// Allow requests from frontend
+app.use(cors({ origin: `${process.env.FRONTEND_URL}` })); 
 
 app.get('/',(req, res) => {
   res.status(200).json({ message: 'Hello World' });
