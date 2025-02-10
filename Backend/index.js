@@ -3,6 +3,9 @@ import { configDotenv } from "dotenv";
 import connectToDb from "./configs/db.js";
 import cors from "cors";
 
+//Routers
+import userRouter from "./routes/user_route.js";
+
 configDotenv();
 connectToDb();
 
@@ -31,6 +34,9 @@ app.use(
     credentials: true,
   })
 );
+
+//endpoints
+app.use("/", userRouter);
 
 app.get("/", (req, res) => {
   res.status(200).json({ message: "Hello World" });
