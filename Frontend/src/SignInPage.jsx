@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-const LOGIN_URL = import.meta.env.VITE_ENV === 'DEV' ?  import.meta.env.VITE_DEV_LOGIN_URL :  import.meta.env.VITE_LOGIN_URL;
+const LOGIN_URL = import.meta.env.VITE_LOGIN_URL;
 
 export default function SignInPage() {
   const navigate = useNavigate();
@@ -16,7 +16,8 @@ export default function SignInPage() {
         navigate("/Home");
       }
     } catch (error) {
-      alert(error)
+      console.log(error);
+      alert(error.message);
     }
   };
 

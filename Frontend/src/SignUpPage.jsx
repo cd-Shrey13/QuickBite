@@ -1,11 +1,10 @@
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-const SIGNUP_URL =
-  import.meta.env.VITE_ENV === "DEV" ?  import.meta.env.VITE_DEV_SIGNUP_URL :  import.meta.env.VITE_SIGNUP_URL;
+const SIGNUP_URL = import.meta.env.VITE_SIGNUP_URL;
 
 export default function SignUpPage() {
   const navigate = useNavigate();
-
+  
   //Function to send login request to the backend
   const sendLoginRequest = async (data) => {
     try {
