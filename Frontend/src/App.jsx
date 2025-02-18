@@ -1,25 +1,21 @@
-import { useEffect, useState } from 'react'
-import './App.css'
-import axios from 'axios'
-const URL = import.meta.env.VITE_URL;
+import "./App.css";
+
+import { Routes, Route } from "react-router-dom";
+import Home from "./Home";
+import SignInPage from "./SignInPage";
+import SignUpPage from "./SignUpPage";
 
 function App() {
-  const [message, setMessage] = useState(null)
-  useEffect(() => {
-    const getResponse = async (params) =>  {
-      const response = await axios.get(`${URL}`);
-      setMessage(response.data.message); 
-    }
-
-    getResponse();
-  }, [])
   return (
     <>
-      {
-        message ? <h1>{message}</h1> : <h1>Loading...</h1>
-      }
+      <Routes>
+        <Route path="/" element={<SignInPage />} />
+        <Route path="/login" element={<SignInPage />} />
+        <Route path="/signup" element={<SignUpPage />} />
+        <Route path="/home" element={<Home />} />
+      </Routes>
     </>
-  )
+  );
 }
 
-export default App
+export default App;
