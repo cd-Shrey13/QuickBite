@@ -35,7 +35,9 @@ export default function SignInPage() {
   };
 
   return (
-    <div>
+    <>
+    <h1>The site is under construction. Stay tuned!</h1>
+    <div style={{visibility: "hidden"}}>
       <h1>SignIn</h1>
       <form onSubmit={(e) => onClickHandler(e)}>
         <label htmlFor="email">
@@ -68,5 +70,6 @@ export default function SignInPage() {
         Sign Up
       </button>
     </div>
+    </>
   );
 }
