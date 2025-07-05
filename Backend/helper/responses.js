@@ -21,8 +21,8 @@ const successResponseWithToken = (response, message, data, token) => {
     .cookie("token", token, {
       expire: new Date(Date.now() + 4 * 24 * 60 * 60 * 1000),
       httpOnly: true, // Prevents client-side access via JavaScript
-      secure: process.env.NODE_ENV === "production"
-
+      secure: true,
+      sameSite: "None",
     })
     .json({
       success: true,
