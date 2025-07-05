@@ -4,6 +4,7 @@ import H1 from '../../components/H1'
 import { FoodListProvider, useFoodList } from '../../context/FoodItemsContext'
 import { useStoreContext } from '../../context/StoreContext'
 import Loader from '../../components/Loader'
+const GET_MENU_ITEMS_IMAGES_URL = import.meta.env.VITE_GET_MENU_ITEMS_IMAGES_URL
 export default function Menu() {
     return (
         <>
@@ -56,7 +57,7 @@ function DishSliderCard({ item }) {
     return (
         <div className="group relative flex w-full max-w-xs flex-col rounded-2xl bg-white p-3 text-black shadow-md transition-transform hover:-translate-y-1 hover:shadow-lg dark:bg-[#181818] dark:text-white">
             <img
-                src={`http://localhost:3000/images/${image}`}
+                src={GET_MENU_ITEMS_IMAGES_URL + `${image}`}
                 alt={name}
                 className="h-36 w-full rounded-xl object-cover sm:h-44"
             />
