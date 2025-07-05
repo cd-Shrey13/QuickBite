@@ -7,10 +7,8 @@ import Cart from './pages/Cart/Cart'
 import { AuthProvider } from './context/AuthContext'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import StoreContextProvider from './context/StoreContext'
-import Navbar from './components/Navbar'
 import { Toaster } from 'react-hot-toast'
 import Menu from './pages/Menu/Menu'
-import Footer from './components/Footer'
 import ProtectedRoute from './components/ProtectedRoute'
 
 ReactDOM.createRoot(document.getElementById('root')).render(

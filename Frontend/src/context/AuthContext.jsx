@@ -4,6 +4,8 @@ import axios from 'axios'
 import toast from 'react-hot-toast'
 
 const AuthContext = createContext()
+const LOGOUT_URL = import.meta.env.VITE_LOGOUT_URL
+const SESSION_VERIFICATION_URL = import.meta.env.VITE_SESSION_VERIFICATION_URL
 
 export const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null)
@@ -13,11 +15,11 @@ export const AuthProvider = ({ children }) => {
     useEffect(() => {
         const fetchUser = async () => {
             try {
-                const res = await axios.get('http://localhost:3000/me', {
+                const res = await axios.get(SESSION_VERIFICATION_URL, {
                     withCredentials: true,
                 })
                 setUser(res.data)
-                toast("You are signed In")
+                toast('You are signed In')
             } catch {
                 setUser(null) // Not logged in or cookie expired
             } finally {
@@ -30,9 +32,9 @@ export const AuthProvider = ({ children }) => {
 
     // Logout
     const logout = async () => {
-        await axios.post('http://localhost:3000/logout', {}, { withCredentials: true })
+        await axios.post(LOGOUT_URL, {}, { withCredentials: true })
         setUser(null)
-        toast.success("Logged out successfully!")
+        toast.success('Logged out successfully!')
     }
 
     // Axios response interceptor: auto-logout on 401

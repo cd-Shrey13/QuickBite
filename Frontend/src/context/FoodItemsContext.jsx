@@ -2,6 +2,7 @@ import { createContext, useContext, useState, useEffect } from 'react'
 import axios from 'axios'
 
 const FoodListContext = createContext()
+const GET_MENU_ITEMS_URL = import.meta.env.VITE_GET_MENU_ITEMS_URL
 
 export const useFoodList = () => {
     return useContext(FoodListContext)
@@ -12,9 +13,7 @@ export const FoodListProvider = ({ children }) => {
 
     //This function loads foodlist data from backend.
     const getFoodList = async () => {
-        const response = await axios.get(
-            'http://localhost:3000/food/listfooditems'
-        )
+        const response = await axios.get(GET_MENU_ITEMS_URL)
         if (!response.data.success) {
             toast.error('Some Error occured')
             return

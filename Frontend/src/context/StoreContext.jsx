@@ -3,6 +3,10 @@ import { useAuth } from './AuthContext'
 import axios from 'axios'
 import toast from 'react-hot-toast'
 
+const ADD_ITEM_TO_CART_URL = import.meta.env.VITE_ADD_ITEM_TO_CART_URL
+const REMOVE_ITEM_FROM_CART_URL = import.meta.env.VITE_REMOVE_ITEM_FROM_CART_URL
+const GET_CART_ITEMS_URL = import.meta.env.VITE_GET_CART_ITEMS_URL
+
 const StoreContext = createContext(null)
 
 function StoreContextProvider({ children }) {
@@ -25,7 +29,7 @@ function StoreContextProvider({ children }) {
     async function getAndSetCartItemList() {
         try {
             const res = await axios.post(
-                'http://localhost:3000/cart/getitems',
+                GET_CART_ITEMS_URL,
                 {},
                 { withCredentials: true }
             )
@@ -53,7 +57,7 @@ function StoreContextProvider({ children }) {
 
         try {
             const res = await axios.post(
-                'http://localhost:3000/cart/additem',
+                ADD_ITEM_TO_CART_URL,
                 { itemId },
                 { withCredentials: true }
             )
@@ -78,7 +82,7 @@ function StoreContextProvider({ children }) {
 
         try {
             const res = await axios.post(
-                'http://localhost:3000/cart/removeitem',
+                REMOVE_ITEM_FROM_CART_URL,
                 { itemId },
                 { withCredentials: true }
             )
@@ -102,12 +106,14 @@ function StoreContextProvider({ children }) {
             return
         }
 
-        const endpoint =
-            type === 'increment' ? '/cart/additem' : '/cart/removeitem'
+        const url =
+            type === 'increment'
+                ? ADD_ITEM_TO_CART_URL
+                : REMOVE_ITEM_FROM_CART_URL
 
         try {
             const res = await axios.post(
-                `http://localhost:3000${endpoint}`,
+                `${url}`,
                 { itemId },
                 { withCredentials: true }
             )

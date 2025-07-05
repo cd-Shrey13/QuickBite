@@ -7,6 +7,8 @@ import axios from 'axios'
 import H1 from '../../components/H1'
 import toast from 'react-hot-toast'
 
+const PLACE_ORDER_URL = import.meta.env.VITE_PLACE_ORDER_URL
+
 function Cart() {
     const { itemsInCart, getAndSetCartItemList, cartTotalAmount } =
         useStoreContext()
@@ -25,7 +27,7 @@ function Cart() {
             }
 
             const response = await axios.post(
-                'http://localhost:3000/order/placeOrder',
+                PLACE_ORDER_URL,
                 {
                     items: itemsPreparedForCart,
                     amount: cartTotalAmount,
