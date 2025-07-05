@@ -1,19 +1,23 @@
 import express from "express";
-import { configDotenv } from "dotenv";
-import connectToDb from "./configs/db.js";
 import cors from "cors";
 import cookieParser from "cookie-parser";
+import { configDotenv } from "dotenv";
 
-//Routers
-import userRouter from "./routes/user-route.js";
-import authMiddleware from "./middlewares/auth.middleware.js";
+import connectDatabase from "./config/db.js";
 
-configDotenv();
-connectToDb();
+import foodRouter from "./routes/foodroute.js";
+import cartRouter from "./routes/cartroute.js";
+import userRouter from "./routes/userRoute.js";
+import orderRouter from "./routes/orderRoute.js";
+import userValidatioRouter from "./routes/user-validation-route.js";
+
+configDotenv(); //Configure environment variables
+connectDatabase(); //Connect database
 
 const app = express();
 app.use(cookieParser());
 app.use(express.json());
+
 const { DEV_ORIGIN, PROD_ORIGIN_1, PROD_ORIGIN_2, PROD_ORIGIN_3 } = process.env;
 const allowedOrigins = [
   DEV_ORIGIN,
@@ -21,6 +25,12 @@ const allowedOrigins = [
   PROD_ORIGIN_2,
   PROD_ORIGIN_3,
 ];
+
+const corsOptions = {
+  origin: "http://localhost:5173", // Replace with your frontend's origin
+  methods: ["GET", "POST"], // Allowed HTTP methods
+  credentials: true, // Enable cookies or authentication headers
+};
 
 // Allow requests from frontend
 app.use(
@@ -38,13 +48,13 @@ app.use(
   })
 );
 
-//endpoints
-app.use("/", userRouter);
-
-app.get("/",(req, res) => {
-  res.status(200).json({ message: "Hello World" });
-});
-
+//API endpoints
+app.use(userRouter);
+app.use(userValidatioRouter);
+app.use("/food", foodRouter);
+app.use("/cart", cartRouter);
+app.use("/order", orderRouter);
+app.use("/images", express.static("uploads"));
 
 app.listen(process.env.PORT, () => {
   console.log(`Server is running on port ${process.env.PORT}`);
