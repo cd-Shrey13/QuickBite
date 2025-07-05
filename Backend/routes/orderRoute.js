@@ -1,8 +1,8 @@
 import express from "express";
 import Razorpay from "razorpay";
 import authMiddleware from "../middlewares/userAuth.js";
-import OrderModel from "../Models/order.model.js";
 import { configDotenv } from "dotenv";
+import OrderModel from '../Models/order.model.js'
 
 // Load environment variables from the default .env file
 configDotenv();
