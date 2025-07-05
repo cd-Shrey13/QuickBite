@@ -1,6 +1,6 @@
-import foodModel from "../Models/food.model.js";
 import fs from "fs";
 import mongoose from "mongoose";
+import foodModel from "../Models/foodModel.js";
 
 export async function addFoodItems(req, res) {
   const imageFileName = req.file.filename;

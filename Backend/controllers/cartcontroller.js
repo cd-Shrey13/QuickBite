@@ -1,5 +1,5 @@
-import UserModel from "../Models/user.model.js";
-import foodModel from "../Models/food.model.js";
+import foodModel from "../Models/foodModel.js";
+import UserModel from "../Models/userModel.js";
 
 //An async function to get food data
 async function getFoodList() {
@@ -57,8 +57,8 @@ export async function getCartItems(req, res) {
       });
     }
 
-    const numberOfItemsInCart = getNumberOfItemsInCart(cartItemsArray)
-    console.log(numberOfItemsInCart)
+    const numberOfItemsInCart = getNumberOfItemsInCart(cartItemsArray);
+    console.log(numberOfItemsInCart);
 
     //send cartData as resonse
     res.status(200).json({
@@ -67,7 +67,7 @@ export async function getCartItems(req, res) {
       data: {
         cartItemsArray,
         cartTotalAmount,
-        numberOfItemsInCart
+        numberOfItemsInCart,
       },
     });
   } catch (error) {

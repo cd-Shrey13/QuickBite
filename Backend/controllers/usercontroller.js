@@ -1,4 +1,3 @@
-import UserModel from "../Models/user.model.js";
 import bcrypt from "bcrypt";
 
 import { configDotenv } from "dotenv";
@@ -10,6 +9,7 @@ import {
   notFoundResponse,
   successResponse,
 } from "../helper/responses.js";
+import UserModel from "../Models/userModel.js";
 
 //configure dotenv
 configDotenv();
