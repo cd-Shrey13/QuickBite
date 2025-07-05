@@ -10,22 +10,29 @@ export const useFoodList = () => {
 
 export const FoodListProvider = ({ children }) => {
     const [foodList, setFoodList] = useState([])
+    const [loading, setLoading] = useState(true);
+
+useEffect(() => {
+    axios.get('/your-food-api')
+})
+
 
     //This function loads foodlist data from backend.
     const getFoodList = async () => {
-        const response = await axios.get(GET_MENU_ITEMS_URL)
-        if (!response.data.success) {
-            toast.error('Some Error occured')
-            return
-        }
-        setFoodList(response.data.data)
+        axios.get(GET_MENU_ITEMS_URL).then((res) => {
+        setFoodList(res.data.data)
+    }).catch((err) => {
+        toast.error(err)
+    }).finally(() => {
+        setLoading(false)
+    })
     }
 
     useEffect(() => {
         getFoodList()
     }, [])
 
-    const contextValue = { foodList, setFoodList, getFoodList }
+    const contextValue = { foodList, setFoodList, getFoodList, loading, setLoading }
 
     return (
         <FoodListContext.Provider value={contextValue}>

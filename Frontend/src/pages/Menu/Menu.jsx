@@ -3,6 +3,7 @@ import Footer from '../../components/Footer'
 import H1 from '../../components/H1'
 import { FoodListProvider, useFoodList } from '../../context/FoodItemsContext'
 import { useStoreContext } from '../../context/StoreContext'
+import Loader from '../../components/Loader'
 export default function Menu() {
     return (
         <>
@@ -24,7 +25,11 @@ export default function Menu() {
 }
 
 function DishSlider() {
-    const { foodList } = useFoodList()
+    const { foodList, loading } = useFoodList()
+
+    if (loading) {
+        return <Loader />
+    }
     return (
         <>
             <div className="grid grid-cols-2 gap-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">

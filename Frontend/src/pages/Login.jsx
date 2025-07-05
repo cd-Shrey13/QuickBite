@@ -6,9 +6,11 @@ const LOGIN_URL = import.meta.env.VITE_LOGIN_URL
 import toast from 'react-hot-toast'
 import Button from '../components/Button'
 import { assets } from '../assets/assets'
+import { useAuth } from '../context/AuthContext'
 
 export default function Login() {
     const navigate = useNavigate()
+    const { refreshAuth } = useAuth()
 
     //Function to send login request to the backend
     const sendLoginRequest = async (data) => {
@@ -18,8 +20,9 @@ export default function Login() {
                 credentials: 'include',
             })
             if (response.data.success) {
-                toast.success('Welcome, User!')
+                await refreshAuth()
                 navigate('/')
+                toast.success('Welcome, User!')
             }
         } catch (error) {
             if (error.status) {
@@ -57,10 +60,10 @@ export default function Login() {
         <>
             <section class="-900 h-full w-full bg-gray-50">
                 <div class="mx-auto flex flex-col items-center justify-center px-6 py-8 md:h-screen lg:py-0">
-                    <img class=" h-20 mb-2" src={assets.logo} alt="logo" />
+                    <img class="mb-2 h-20" src={assets.logo} alt="logo" />
                     <div class="-700 -800 w-full rounded-lg bg-white shadow sm:max-w-md md:mt-0 xl:p-0">
                         <div class="space-y-4 p-6 sm:p-8 md:space-y-6">
-                            <h1 class="text-xl leading-tight font-bold tracking-tight text-(--color-text-primary) md:text-2xl mb-4">
+                            <h1 class="mb-4 text-xl leading-tight font-bold tracking-tight text-(--color-text-primary) md:text-2xl">
                                 Sign in to your account
                             </h1>
                             <form

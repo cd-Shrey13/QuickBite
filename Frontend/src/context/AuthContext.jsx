@@ -30,6 +30,15 @@ export const AuthProvider = ({ children }) => {
         fetchUser()
     }, [])
 
+    // Call this after login
+    const refreshAuth = async () => {
+        console.log("Refreshed Auth!")
+        const res = await axios.get(SESSION_VERIFICATION_URL, {
+            withCredentials: true,
+        })
+        setUser(res.data)
+    }
+
     // Logout
     const logout = async () => {
         await axios.post(LOGOUT_URL, {}, { withCredentials: true })
@@ -52,7 +61,9 @@ export const AuthProvider = ({ children }) => {
     }, [])
 
     return (
-        <AuthContext.Provider value={{ user, setUser, logout, loading }}>
+        <AuthContext.Provider
+            value={{ user, setUser, logout, loading, refreshAuth }}
+        >
             {children}
         </AuthContext.Provider>
     )
